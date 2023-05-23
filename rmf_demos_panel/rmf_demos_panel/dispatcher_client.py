@@ -312,6 +312,22 @@ class DispatcherClient(Node):
                     "place": desc["dropoff_place_name"],
                     "handler": desc["dropoff_ingestor"],
                     "payload": []}
+            elif task_json["task_type"] == "Pickup":
+                request["category"] = "pickup"
+                request["description"]["pickup"] = {
+                    "place": desc["pickup_place_name"],
+                    "handler": desc["pickup_dispenser"],
+                    "payload": []}
+            elif task_json["task_type"] == "Dropoff":
+                request["category"] = "dropoff"
+                request["description"]["pickup"] = {
+                    "place": desc["pickup_place_name"],
+                    "handler": desc["pickup_dispenser"],
+                    "payload": []}
+                request["description"]["dropoff"] = {
+                    "place": desc["dropoff_place_name"],
+                    "handler": desc["dropoff_ingestor"],
+                    "payload": []}
             else:
                 raise Exception("Invalid TaskType")
 

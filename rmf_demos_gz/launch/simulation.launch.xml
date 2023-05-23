@@ -15,19 +15,4 @@
   <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
   <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
 
-  <executable cmd="gzserver --verbose -s libgazebo_ros_factory.so -s libgazebo_ros_init.so $(var world_path)" output="both">
-    <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
-    <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
-    <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
-    <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
-    <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
-  </executable>
-  <group unless="$(var headless)">
-    <executable cmd="gzclient --verbose $(var world_path)" output="both">
-      <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
-      <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
-      <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
-    </executable>
-  </group>
-
 </launch>

@@ -58,7 +58,7 @@ logging.basicConfig(level=logging.DEBUG,
 # default dashboard
 dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
                     "valid_task": [],
-                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}
+                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}, "Pickup": {}, "Dropoff": {}}
                     }
 
 ###############################################################################

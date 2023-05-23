@@ -3,6 +3,8 @@
   "valid_task" : ["Loop"],
   "task": {
     "Delivery": {},
+    "PickUp": {},
+    "Dropoff": {},
     "Loop": {
       "places": [
         "L1_left_nurse_center",

@@ -67,6 +67,9 @@ class TaskRequester(Node):
         parser.add_argument('-pt', '--priority',
                             help='Priority value for this request',
                             type=int, default=0)
+        parser.add_argument('-tp', '--task_priority',
+                            help='Task Priority value for this request',
+                            type=int, default=0)
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
 
@@ -113,6 +116,10 @@ class TaskRequester(Node):
             self.get_logger().info("Using 'dispatch_task_request'")
             payload["type"] = "dispatch_task_request"
         request = {}
+
+        # 测试任务的优先级
+        if self.args.task_priority:
+            request["task_priority"] = {"type": "binary", "value": self.args.task_priority}
 
         # Set task request start time
         now = self.get_clock().now().to_msg()

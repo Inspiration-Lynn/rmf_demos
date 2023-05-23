@@ -114,6 +114,9 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     drain_battery = fleet_config['account_for_battery_drain']
     recharge_threshold = fleet_config['recharge_threshold']
     recharge_soc = fleet_config['recharge_soc']
+    interruptable_soc = fleet_config['interruptable_soc']
+    autorecharge_soc = fleet_config['autorecharge_soc']
+    autorepark_soc = fleet_config['autorepark_soc']
     finishing_request = fleet_config['task_capabilities']['finishing_request']
     node.get_logger().info(f"Finishing request: [{finishing_request}]")
     # Set task planner params
@@ -124,6 +127,9 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         tool_sink,
         recharge_threshold,
         recharge_soc,
+        interruptable_soc,
+        autorecharge_soc,
+        autorepark_soc,
         drain_battery,
         finishing_request)
     assert ok, ("Unable to set task planner params")
@@ -141,6 +147,15 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         node.get_logger().info(
             f"Fleet [{fleet_name}] is configured to perform Clean tasks")
         task_capabilities.append(TaskType.TYPE_CLEAN)
+    # 增加对pickup和dropoff的支持
+    if fleet_config['task_capabilities']['pickup']:
+        node.get_logger().info(
+            f"Fleet [{fleet_name}] is configured to perform PickUp tasks")
+        task_capabilities.append(TaskType.TYPE_PICKUP)
+    if fleet_config['task_capabilities']['dropoff']:
+        node.get_logger().info(
+            f"Fleet [{fleet_name}] is configured to perform DropOff tasks")
+        task_capabilities.append(TaskType.TYPE_DROPOFF)
 
     # Callable for validating requests that this fleet can accommodate
     def _task_request_check(task_capabilities, msg: TaskProfile):

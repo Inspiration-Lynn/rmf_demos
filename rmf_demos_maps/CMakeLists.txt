@@ -25,6 +25,40 @@ foreach(path ${traffic_editor_paths})
   set(output_world_path ${output_dir}/${output_world_name}.world)
   set(output_model_dir ${output_dir}/models)
 
+
+  ##############################################################################
+  # Generate the nav graphs
+  ##############################################################################
+
+  set(output_nav_graphs_dir ${output_dir}/nav_graphs/)
+  set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
+  add_custom_command(
+    OUTPUT ${output_nav_graphs_phony}
+    COMMAND ros2 run rmf_building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
+    DEPENDS ${map_path}
+  )
+
+  
+  add_custom_target(generate_${output_world_name}_nav_graphs ALL
+    DEPENDS ${output_nav_graphs_phony}
+  )
+
+  install(
+    DIRECTORY ${output_dir}
+    DESTINATION share/${PROJECT_NAME}/maps
+  )
+
+  # message(${world_name})
+  if (${world_name} STREQUAL "leju")
+    # message("++++++++++++++++++++++")
+      continue()
+  endif()
+
+  if (${world_name} STREQUAL "Lejushandong")
+  # message("++++++++++++++++++++++")
+    continue()
+  endif()
+
   ##############################################################################
   # Generate Gz world and download Models
   ##############################################################################
@@ -104,25 +138,5 @@ foreach(path ${traffic_editor_paths})
     DESTINATION share/${PROJECT_NAME}/maps
   )
 
-  ##############################################################################
-  # Generate the nav graphs
-  ##############################################################################
-
-  set(output_nav_graphs_dir ${output_dir}/nav_graphs/)
-  set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
-  add_custom_command(
-    OUTPUT ${output_nav_graphs_phony}
-    COMMAND ros2 run rmf_building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
-    DEPENDS ${map_path}
-  )
-
-  add_custom_target(generate_${output_world_name}_nav_graphs ALL
-    DEPENDS ${output_nav_graphs_phony}
-  )
-
-  install(
-    DIRECTORY ${output_dir}
-    DESTINATION share/${PROJECT_NAME}/maps
-  )
 
 endforeach()

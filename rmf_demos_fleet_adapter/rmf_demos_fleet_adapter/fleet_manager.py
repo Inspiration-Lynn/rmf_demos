@@ -73,6 +73,7 @@ class State:
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
+        self.connect = True
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
 
@@ -159,10 +160,17 @@ class FleetManager(Node):
             self.dock_summary_cb,
             qos_profile=transient_qos)
 
+        # path_pub的qos
+        # self.path_pub = self.create_publisher(
+        #     PathRequest,
+        #     'robot_path_requests',
+        #     qos_profile = qos_profile_system_default)
+        # transient_qos.history = History.KEEP_LAST
+        transient_qos.depth = 1000
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
-            qos_profile=qos_profile_system_default)
+            transient_qos)
 
         self.task_id = -1
 
@@ -235,7 +243,9 @@ class FleetManager(Node):
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
             self.path_pub.publish(path_request)
-
+            print("pub path request")
+            print(path_request)
+            # self.get_logger().info(f"pub path request")
             self.robots[robot_name].destination = target_loc
 
             data['success'] = True
@@ -255,6 +265,9 @@ class FleetManager(Node):
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
             self.path_pub.publish(path_request)
+            print("pub path request")
+            print(path_request)
+            # self.get_logger().info(f"pub path request")
             data['success'] = True
             return data
 
@@ -286,7 +299,9 @@ class FleetManager(Node):
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
             self.path_pub.publish(path_request)
-
+            print("pub path request")
+            print(path_request)
+            # self.get_logger().info(f"pub path request")
             self.robots[robot_name].destination = target_loc
 
             data['success'] = True
@@ -300,9 +315,25 @@ class FleetManager(Node):
             if state.destination is None:
                 return
             destination = state.destination
+            # path为null，并且state为0，
+            # msg.task_id == self.task_id
+
             if ((msg.mode.mode == 0 or msg.mode.mode == 1) and
-                    len(msg.path) == 0):
+                    # len(msg.path) == 0):
+                    len(msg.path) == 0 and 
+                    str(self.task_id)==msg.task_id ):
                 self.robots[msg.name].destination = None
+            
+            # 重新发送个path request
+            if(str(self.task_id)==msg.task_id):
+                self.robots[msg.name].connect = True
+            elif (len(msg.path) == 0):
+                self.robots[msg.name].connect = False
+                # self.node.get_logger().info(
+                #     f"Robot [{self.name}]connot connect "
+                #     f"rmf server")
+                
+            
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
@@ -323,6 +354,10 @@ class FleetManager(Node):
             {'x': position[0], 'y': position[1], 'yaw': angle}
         data['battery'] = state.state.battery_percent
         data['completed_request'] = False
+        data['connect'] = True
+        if not state.connect:
+            data['connect'] = False
+        
         if state.destination is not None:
             destination = state.destination
             # remove offset for calculation if using gps coords

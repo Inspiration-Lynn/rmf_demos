@@ -3,6 +3,8 @@
   "valid_task" : ["Loop", "Clean"],
   "task": {
     "Delivery": {},
+    "PickUp": {},
+    "Dropoff": {},
     "Loop": {
       "places": [
         "restaurant",

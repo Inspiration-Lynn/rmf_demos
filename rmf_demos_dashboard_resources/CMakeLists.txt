@@ -32,5 +32,7 @@ install(DIRECTORY
   office
   hotel
   clinic
+  leju
+  Lejushandong
   DESTINATION share/${PROJECT_NAME}
 )

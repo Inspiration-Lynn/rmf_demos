@@ -3,10 +3,10 @@ building_map_server:
     use_sim_time: false
 building_systems_visualizer:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 door:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 door_panel_requester_node:
   ros__parameters:
     use_sim_time: false
@@ -20,25 +20,25 @@ fleet_state_visualizer:
 gazebo:
   ros__parameters:
     publish_rate: 10.0
-    use_sim_time: true
+    use_sim_time: false
 rmf_panel:
   ros__parameters:
     use_sim_time: false
 rmf_traffic_schedule_node:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 rviz:
   ros__parameters:
     use_sim_time: false
 rviz_node:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 teleport_dispenser:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 teleport_ingestor:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
 tinyRobot_fleet_adapter:
   ros__parameters:
     angular_acceleration: 2.0
@@ -53,13 +53,13 @@ tinyRobot_fleet_adapter:
     nav_graph_file: ./install/rmf_demos_maps/share/rmf_demos_maps/maps/office/nav_graphs/0.yaml
     perform_deliveries: true
     reversible: true
-    use_sim_time: true
+    use_sim_time: false
     vicinity_radius: 1.5
 tinyRobot_state_aggregator:
   ros__parameters:
     fleet_name: tinyRobot
     robot_prefix: tinyRobot
-    use_sim_time: true
+    use_sim_time: false
 viz:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false

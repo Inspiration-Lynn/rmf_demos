@@ -155,6 +155,14 @@ class RobotAPI:
         else:
             return False
 
+    def network_connect(self, robot_name: str):
+        ''' Return True if the robot has successfully connected rmf server. Else False.'''
+        response = self.data(robot_name)
+        if response is not None and response.get('data') is not None:
+            return response['data']['connect']
+        else:
+            return False
+
     def process_completed(self, robot_name: str):
         ''' Return True if the robot has successfully completed its previous
             process request. Else False.'''
@@ -173,6 +181,7 @@ class RobotAPI:
         if robot_name is None:
             url = self.prefix + f'/open-rmf/rmf_demos_fm/status/'
         else:
+            # 向一个url获取robot_status
             url = self.prefix +\
                 f'/open-rmf/rmf_demos_fm/status?robot_name={robot_name}'
         try:

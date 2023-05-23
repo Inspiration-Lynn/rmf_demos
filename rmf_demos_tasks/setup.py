@@ -35,6 +35,12 @@ setup(
           'dispatch_go_to_place = rmf_demos_tasks.dispatch_go_to_place:main',
           'mock_docker = rmf_demos_tasks.mock_docker:main',
           'teleop_robot = rmf_demos_tasks.teleop_robot:main',
+          # 增加对pickup和dropoff的支持
+          'dispatch_pickup = rmf_demos_tasks.dispatch_pickup:main',
+          'dispatch_dropoff = rmf_demos_tasks.dispatch_dropoff:main',
+          # 定时任务
+          'booking = rmf_demos_tasks.booking:main',
+          'booking_client = rmf_demos_tasks.booking_client:main',
         ],
     },
 )

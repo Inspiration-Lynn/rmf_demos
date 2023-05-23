@@ -1,6 +1,6 @@
 { 
   "world_name" : "Airport Terminal World",
-  "valid_task" : ["Delivery", "Clean", "Loop"],
+  "valid_task" : ["Delivery", "Clean", "Loop", "Pickup","Dropoff"],
   "task": {
     "Delivery": {
       "option": {
@@ -35,6 +35,24 @@
         "zone_3",
         "zone_4"
       ]
+    },
+    "Pickup": {
+      "option": {
+        "mop": {
+          "pickup_place_name": "mopcart_pickup",
+          "pickup_dispenser": "mopcart_dispenser"
+        }
+      }
+    },
+    "Dropoff": {
+      "option": {
+        "mop": {
+          "pickup_place_name": "mopcart_pickup",
+          "pickup_dispenser": "mopcart_dispenser",
+          "dropoff_place_name": "spill",
+          "dropoff_ingestor": "mopcart_collector"
+        }
+      }
     },
     "Station": {},
     "Patrol": {},

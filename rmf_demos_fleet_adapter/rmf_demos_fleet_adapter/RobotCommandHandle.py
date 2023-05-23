@@ -57,6 +57,8 @@ class PlanWaypoint:
         self.time = wp.time
         self.graph_index = wp.graph_index
         self.approach_lanes = wp.approach_lanes
+        self.level_name = wp.level_name
+        
 
 
 class RobotCommandHandle(adpt.RobotCommandHandle):
@@ -146,6 +148,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             depth=1,
             reliability=Reliability.RELIABLE,
             durability=Durability.TRANSIENT_LOCAL)
+        
+        
 
         self.node.create_subscription(
             DockSummary,
@@ -163,6 +167,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_thread.start()
 
         self.initialized = True
+
 
     def sleep_for(self, seconds):
         goal_time =\
@@ -189,7 +194,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             waypoints,
             next_arrival_estimator,
             path_finished_callback):
-
+        print("/home/leju/rmf/src/demonstrations/rmf_demos/rmf_demos_fleet_adapter/rmf_demos_fleet_adapter/RobotCommandHandle.py")
         if self._follow_path_thread is not None:
             self._quit_path_event.set()
             if self._follow_path_thread.is_alive():
@@ -221,6 +226,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         def _follow_path():
             target_pose = []
+            
+            path_has_pub = 20
+            
             while (
                     self.remaining_waypoints or
                     self.state == RobotState.MOVING or
@@ -239,15 +247,21 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     target_pose = self.target_waypoint.position
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
+                    map_name = self.target_waypoint.level_name
+                    print("map name is: "+map_name)
+                    if(map_name!=""):
+                        self.map_name = map_name
+                        print(map_name)
                     speed_limit = self.get_speed_limit(self.target_waypoint)
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
                                                  self.map_name,
                                                  speed_limit)
-
+                    path_has_pub = 20 # 记录发送时间
                     if response:
                         self.remaining_waypoints = self.remaining_waypoints[1:]
                         self.state = RobotState.MOVING
+
                     else:
                         self.node.get_logger().info(
                             f"Robot {self.name} failed to navigate to "
@@ -272,6 +286,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                         self.path_index,
                                         timedelta(seconds=0.0))
 
+                # 等待到达下一个点
                 elif self.state == RobotState.MOVING:
                     self.sleep_for(0.1)
                     # Check if we have reached the target
@@ -290,6 +305,35 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 self.on_waypoint = None  # still on a lane
                         else:
                             # Update the lane the robot is on
+                            # 未完成任务，
+                            connect = self.api.network_connect(self.name)
+                            # self.node.get_logger().info(
+                            #     f"Robot [{self.name}] has connect status is [{connect}] "
+                            #     f"  ")
+                            if(not connect):
+                                # self.node.get_logger().info(
+                                #     f"Robot [{self.name}]connot connect "
+                                #     f"rmf server")
+                                path_has_pub -= 1
+                                if path_has_pub>0:  # 说明距离上次发布还不到20s
+                                    self.sleep_for(1)
+                                else: # 说明距离上次发布超过20s了，此时还在原地，发布新的path    
+                                    path_has_pub = 20
+                                    target_pose = self.target_waypoint.position
+                                    [x, y] = target_pose[:2]
+                                    theta = target_pose[2]
+                                    map_name = self.target_waypoint.level_name
+                                    self.node.get_logger().info(
+                                        f"Robot [{self.name}] has loss its target "
+                                        f"waypoint,重复发request")
+                                    if(map_name!=""):
+                                        self.map_name = map_name
+                                        print(map_name)
+                                    speed_limit = self.get_speed_limit(self.target_waypoint)
+                                    response = self.api.navigate(self.name,
+                                                                [x, y, theta],
+                                                                self.map_name,
+                                                                speed_limit)
                             lane = self.get_current_lane()
                             if lane is not None:
                                 self.on_waypoint = None
@@ -309,6 +353,11 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                         ).location) < 0.5:
                                     self.on_waypoint =\
                                         self.last_known_waypoint_index
+                                        # 在上一个点的地方，可以重新发path，或者在后面重新发送path
+                                        # self.target_waypoint
+                                    
+                                    # self.sleep_for(10)
+                                    
                                 else:
                                     self.on_lane = None  # update_off_grid()
                                     self.on_waypoint = None
@@ -542,6 +591,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         last_pose = copy.copy(self.position)
         waypoints = []
         for i in range(len(wps)):
+            print(wps[i].level_name)
             waypoints.append(PlanWaypoint(i, wps[i]))
 
         # We assume the first waypoint is safe for pruning if it is
