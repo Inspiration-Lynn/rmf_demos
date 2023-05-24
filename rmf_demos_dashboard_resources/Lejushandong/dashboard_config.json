@@ -1,0 +1,31 @@
+{
+  "world_name" : "Leju World",  
+  "valid_task": ["Delivery", "Loop"],
+  "task": {
+    "Delivery": {
+      "option": {
+        "coke": {
+          "pickup_place_name": "charger",
+          "pickup_dispenser": "charger",
+          "dropoff_place_name": "charger",
+          "dropoff_ingestor": "charger"
+        }
+      }
+    },
+    "Loop": {
+      "places": [
+        "charger"
+      ]
+    },
+    "PickUp": {},
+    "Dropoff": {},
+    "Clean": {
+    },
+    "Station": {
+    },
+    "Patrol": {
+    },
+    "Charging": {
+    }
+  }
+}

@@ -1,0 +1,256 @@
+coordinate_system: reference_image
+crowd_sim:
+  agent_groups:
+    - {agents_name: [], agents_number: 0, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
+  agent_profiles:
+    - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
+  enable: 0
+  goal_sets: []
+  model_types: []
+  obstacle_set: {class: 1, file_name: L1_navmesh.nav, type: nav_mesh}
+  states:
+    - {final: 1, goal_set: -1, name: external_static, navmesh_file_name: ""}
+  transitions: []
+  update_time_step: 0.1
+graphs:
+  {}
+levels:
+  L1:
+    drawing:
+      filename: l1.png
+    elevation: 0
+    fiducials:
+      - [508.017, 138.03, ref1]
+      - [451.786, 220.423, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [4, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [5, 6, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [4, 7, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [7, 8, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [9, 0, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [10, 11, {distance: [3, 2.05]}]
+    vertices:
+      - [584, 154, 0, l1_8]
+      - [584, 220, 0, l1_7]
+      - [584, 293, 0, l1_6]
+      - [378, 293, 0, l1_5]
+      - [172, 293, 0, l1_2]
+      - [113, 293, 0, l1_3]
+      - [113, 263.05, 0, l1_4]
+      - [172, 336, 0, l1_1]
+      - [110, 336, 0, l1_0, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true]}]
+      - [523, 154, 0, lift1, {lift_cabin: [1, lift]}]
+      - [643, 268, 0, ""]
+      - [643, 309, 0, ""]
+  L2:
+    drawing:
+      filename: l2.png
+    elevation: 0
+    fiducials:
+      - [501.23, 94.613, ref1]
+      - [444.046, 176.078, ref2]
+    lanes:
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [4, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [6, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 7, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [7, 8, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [8, 9, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [9, 10, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [11, 12, {distance: [3, 2.05]}]
+    vertices:
+      - [515.641, 110.175, 0, lift2, {lift_cabin: [1, lift]}]
+      - [578.2910000000001, 111.904, 0, l2_6]
+      - [578.525, 188.15, 0, l2_5]
+      - [578.2910000000001, 248.442, 0, l2_4]
+      - [260.798, 244.376, 0, l2_7]
+      - [261.11, 163.673, 0, l2_8]
+      - [105.336, 243.75, 0, l2_9]
+      - [804.133, 248.755, 0, l2_3]
+      - [1071.577, 248.755, 0, l2_2]
+      - [1071.577, 366.368, 0, l2_1]
+      - [1022.155, 393.582, 0, charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true]}]
+      - [724, 227, 0, ""]
+      - [724, 268, 0, ""]
+  L3:
+    drawing:
+      filename: l3.png
+    elevation: 0
+    fiducials:
+      - [463.939, 143.118, ref1]
+      - [406.915, 224.089, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [4, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 6, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [7, 8, {distance: [3, 2.05]}]
+    vertices:
+      - [478.216, 158.558, 0, lift3, {lift_cabin: [1, lift]}]
+      - [537, 158.558, 0, l3_1]
+      - [537, 227.949, 0, l3_2]
+      - [537, 295, 0, l3_3]
+      - [690, 295, 0, l3_4]
+      - [690, 240, 0, l3_5]
+      - [230, 295, 0, l3_6]
+      - [617, 275, 0, ""]
+      - [617, 316, 0, ""]
+  L4:
+    drawing:
+      filename: l4.png
+    elevation: 0
+    fiducials:
+      - [454.924, 93.935, ref1]
+      - [397.018, 173.975, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [5, 6, {distance: [3, 2.05]}]
+    vertices:
+      - [468.654, 108.972, 0, lift4, {lift_cabin: [1, lift]}]
+      - [530, 112.972, 0, l4_1]
+      - [530, 180, 0, l4_2]
+      - [530, 245, 0, l4_3]
+      - [225, 245, 0, l4_4]
+      - [470, 225, 0, ""]
+      - [470, 266, 0, ""]
+  L5:
+    drawing:
+      filename: l5.png
+    elevation: 0
+    fiducials:
+      - [477.704, 110.025, ref1]
+      - [419.884, 189.986, ref2]
+    lanes:
+      - [1, 0, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [0, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [3, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [4, 5, {distance: [3, 2.05]}]
+    vertices:
+      - [550.919, 196.903, 0, l5_2]
+      - [550.919, 127.051, 0, l5_1]
+      - [550.919, 257.186, 0, l5_3]
+      - [491.427, 125.051, 0, "", {lift_cabin: [1, lift]}]
+      - [619.715, 243, 0, ""]
+      - [619.715, 284, 0, ""]
+  L6:
+    drawing:
+      filename: l6.png
+    elevation: 0
+    fiducials:
+      - [493.116, 106.158, ref1]
+      - [438.462, 187.845, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [4, 5, {distance: [3, 2.05]}]
+    vertices:
+      - [508.253, 122.146, 0, "", {lift_cabin: [1, lift]}]
+      - [571.016, 122.146, 0, l6_1]
+      - [571.016, 170.452, 0, l6_2]
+      - [571.016, 214.202, 0, l6_3]
+      - [636.3819999999999, 235, 0, ""]
+      - [636.3819999999999, 276, 0, ""]
+  L7:
+    drawing:
+      filename: l7.png
+    elevation: 0
+    fiducials:
+      - [476.854, 102.998, ref1]
+      - [421.188, 183.816, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [4, 5, {distance: [3, 2.05]}]
+    vertices:
+      - [491.42, 118.59, 0, "", {lift_cabin: [1, lift]}]
+      - [553.129, 118.59, 0, l7_1]
+      - [553.129, 177.566, 0, l7_2]
+      - [553.129, 220.966, 0, l7_3]
+      - [616.977, 233, 0, ""]
+      - [616.977, 274, 0, ""]
+  L9:
+    drawing:
+      filename: l9.png
+    elevation: 0
+    fiducials:
+      - [443.235, 57.237, ref1]
+      - [386.885, 139.955, ref2]
+    lanes:
+      - [0, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [1, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [2, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    measurements:
+      - [4, 5, {distance: [3, 2.05]}]
+    vertices:
+      - [458.303, 73.285, 0, "", {lift_cabin: [1, lift]}]
+      - [520.741, 73.285, 0, l9_1]
+      - [520.741, 133.946, 0, l9_2]
+      - [520.741, 177.385, 0, l9_3]
+      - [587.345, 188, 0, ""]
+      - [587.345, 229, 0, ""]
+lifts:
+  lift:
+    depth: 1.5
+    doors:
+      lift_door:
+        door_type: 2
+        motion_axis_orientation: 1.57
+        width: 1
+        x: 1
+        y: 0
+    highest_floor: L5
+    initial_floor_name: L1
+    level_doors:
+      L1: [lift_door]
+      L2: [lift_door]
+      L3: [lift_door]
+      L4: [lift_door]
+      L5: [lift_door]
+      L6: [lift_door]
+      L7: [lift_door]
+      L9: [lift_door]
+    lowest_floor: L1
+    plugins: true
+    reference_floor_name: L1
+    width: 1.5
+    x: 523
+    y: 154
+    yaw: 0
+name: Lejushandong
